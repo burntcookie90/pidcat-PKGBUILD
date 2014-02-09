@@ -2,7 +2,7 @@
 
 pkgname=pidcat-git
 pkgver=1.4.1.r0.g55c8786
-pkgrel=1
+pkgrel=2
 pkgdesc="Colored logcat script which only shows log entries for a specific application package."
 conflicts=("pidcat")
 provides=("pidcat")
