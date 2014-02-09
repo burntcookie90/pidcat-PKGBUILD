@@ -1,20 +1,28 @@
 # Maintainer: burntcookie90
 
-pkgname=pidcat
-pkgver=1.4.1
+pkgname=pidcat-git
+pkgver=1.4.1.r0.g55c8786
 pkgrel=1
 pkgdesc="Colored logcat script which only shows log entries for a specific application package."
+conflicts=("pidcat")
+provids=("pidcat")
 license=('Apache')
 url="https://github.com/JakeWharton/pidcat"
 arch=('i686' 'x86_64')
 depends=('python2')
-source=("https://github.com/JakeWharton/pidcat/archive/${pkgver}.tar.gz" "pidcat.patch")
-md5sums=("16502b0a089be9c111ca45ae14f9867f" "88dd654d600d8de4ff42174d042f0a77")
+makedepends=('git')
+source=(${pkgname}::"git://github.com/JakeWharton/pidcat.git" "pidcat.patch")
+md5sums=("SKIP" "88dd654d600d8de4ff42174d042f0a77")
+
+pkgver() {
+  cd "$srcdir/${pkgname}/"
+  git describe --long | sed -r 's/([^-]*-g)/r\1/;s/-/./g'
+}
 
 build() {
-	patch -N ${srcdir}/${pkgname}-${pkgver}/pidcat.py pidcat.patch 
+	patch -N ${srcdir}/${pkgname}/pidcat.py pidcat.patch 
 }
 
 package() {
-	install -D -m 755 ${srcdir}/${pkgname}-${pkgver}/pidcat.py ${pkgdir}/usr/bin/pidcat
+	install -D -m 755 ${srcdir}/${pkgname}/pidcat.py ${pkgdir}/usr/bin/pidcat
 }
