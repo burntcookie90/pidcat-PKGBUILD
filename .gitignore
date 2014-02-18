@@ -1,4 +1,5 @@
 *.tar.xz
-src
-pkg
+src/
+pkg/
 *.tar.gz
+pidcat-git/
